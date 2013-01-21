@@ -5,7 +5,7 @@ canvas.height = 768
 ctx = canvas.getContext '2d'
 
 ws = new WebSocket "ws://#{window.location.host}"
-ws.onerror = (e) -> console.log e
+ws.onerror = (e) -> console.error e
 
 dt = 33
 

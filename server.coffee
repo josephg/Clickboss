@@ -1,7 +1,8 @@
-#http = require 'http'
+http = require 'http'
 
 express = require 'express'
-app = express.createServer()
+app = express()
+server = http.createServer app
 
 app.use express.static("#{__dirname}/")
 port = 8123
@@ -12,7 +13,7 @@ snapshotDelay = 5
 bytesSent = bytesReceived = 0
 
 WebSocketServer = require('ws').Server
-wss = new WebSocketServer {server: app}
+wss = new WebSocketServer {server}
 
 #state = 'menu' # Big button in the middle to start. Other state = 'playing'.
 
@@ -78,6 +79,6 @@ setInterval ->
     bytesSent = bytesReceived = 0
   , 1000
 
-app.listen port
+server.listen port
 console.log "Listening on port #{port}"
 
